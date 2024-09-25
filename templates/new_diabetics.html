@@ -1,0 +1,61 @@
+{% extends "base-sp.html" %}
+{% load static %}
+{% block css %}
+<link href={% static "css/new_diabetics_css.css" %} rel="stylesheet" />
+{% endblock css %}
+{% block title %}DiabetoPlus | New Diabetics{% endblock title %}
+
+{% block content %}
+
+<div class="intro-container container mt-3">
+    <p>Being newly diagnosed with diabetes can be confusing and overwhelming with all the new things you have to learn
+        and understand. This page provides a synopsis of the most important information and answers to commonly asked
+        questions.</p>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/p1.jpg' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>What is Diabetes?</h2>
+            <p>
+                Find out about diabetes: the terminology, symptoms, diagnosis, and goals of treatment. Learn how the body
+                keeps the blood sugar in balance.
+            </p>
+            <ul>
+                <li>What is Blood Sugar, Insulin</li>
+                <li>Symptoms</li>
+                <li>Diagnosis</li>
+                <li>Goals</li>
+            </ul>
+            <a href="#" class="btn1 btn">Read More</a>
+        </div>
+    </div>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/p2.jpg' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>Types of Diabetes?</h2>
+            <p>
+                There are many types of diabetes. Learn more about your type or see a comprehensive list in the classification table.
+            </p>
+            <ul>
+                <li>Type 1</li>
+                <li>Type 2</li>
+                <li>Gestational</li>
+                <li>Other</li>
+            </ul>
+            <a href="#" class="btn1 btn">Read More</a>
+        </div>
+    </div>
+</div>
+
+<!-- Continue with the rest of your content -->
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+.bmi-chart {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #178066;
+    color: #fff !important;
+    font-weight: bold;
+    color: #000;
+}
+
+td, th {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid gray;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+td {
+    color: #333;
+}

@@ -1,0 +1,139 @@
+{% extends "base-sp.html" %}
+{% load static %}
+{% block css %}
+<link href={% static "css/bmi_css.css" %} rel="stylesheet" />
+{% endblock css %}
+{% block title %}DiabetoPlus | Prediction{% endblock title %}
+
+{% block content %}
+<h2 class="container-h2 container">Welcome {{ request.user.username }} Predict your Diabetes</h2>
+<div class="container-predict container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="predict-form">
+                <h3>Enter Your Symptoms Here</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="gender">Gender:</label>
+                    <select name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select><br>
+
+                    <label for="age">Age:</label>
+                    <input type="number" name="age" placeholder="Enter Your Age" required><br>
+
+                    <label for="hypertension">Hypertension:</label>
+                    <select name="hypertension" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select><br>
+
+                    <label for="heart_disease">Heart Disease:</label>
+                    <select name="heart_disease" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select><br>
+
+                    <label for="smoking_history">Smoking History:</label>
+                    <select name="smoking_history" required>
+                        <option value="never">Never</option>
+                        <option value="not current">Not current</option>
+                        <option value="former">Former</option>
+                        <option value="current">Current</option>
+                        <option value="ever">Ever</option>
+                        <option value="No Info">No Info</option>
+                    </select><br>
+
+                    <label for="bmi">BMI(Body Mass Index):</label>
+                    <input type="number" name="bmi" step="0.01"
+                        placeholder="You can Calculate BMI In Information Section" required><br>
+
+                    <label for="HbA1c_level">HbA1c Level (Optional):</label>
+                    <input type="number" name="HbA1c_level" step="0.01"
+                        placeholder="Normal Range is Below 5.7%"><br />
+
+                    <label for="blood_glucose_level">Blood Glucose Level:</label>
+                    <input type="number" name="blood_glucose_level"
+                        placeholder="Required Normal Range is 70 to 140 if you dont know yours" required><br>
+
+                    <button type="submit">Predict</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="Predict-Info">
+                <h3>INFORMATION</h3>
+                <span>Hba1c Level</span>
+                <p>HbA1c (hemoglobin A1c) level is a blood test that measures the average level of blood sugar (glucose)
+                    over the past 2 to 3 months. It's used to diagnose and monitor diabetes and provides an indication
+                    of how well a person's blood sugar has been controlled over time.<br>Note if you don't use Hba1c level the Accuracy of the Predictor decreases</p>
+                <span>BMI(Body Mass Index)</span>
+                <p>BMI, or Body Mass Index, is a measure used to assess body fat based on a person's weight and height.
+                    It is a simple, widely used tool to categorize individuals into different weight status categories,
+                    which can be indicative of health risks.</p>
+                    <div class="BMI-calc">
+                        <span>BMI Calculator</span><br>
+                        <!-- Input for Height in Feet -->
+                        <label for="heightFeet">Height (Feet):</label><br>
+                        <input type="number" id="heightFeet" step="1" placeholder="Feet">
+                        <input type="number" id="heightInches" step="1" placeholder="Inches"><br>
+                    
+                        <!-- Input for Weight in Kilograms -->
+                        <label for="weight">Weight (kg):</label><br>
+                        <input type="number" id="weight" step="0.1" placeholder="Weight in Kilograms"><br>
+                    
+                        <!-- Calculate Button -->
+                        <button onclick="calculateBMI()" class="btn btn-warning my-2">
+                            <i class="fa-solid fa-calculator" style="margin-right: 7px;"></i>Calculate BMI
+                        </button><br>
+                    
+                        <!-- Display Result -->
+                        <div class="result" id="result"></div><br>
+                    </div>
+                    <div class="bmi-chart">
+                        <span>Body Mass Index (BMI) Chart</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>BMI Range</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Below 18.5</td>
+                                    <td>Underweight</td>
+                                </tr>
+                                <tr>
+                                    <td>18.5 – 24.9</td>
+                                    <td>Normal weight</td>
+                                </tr>
+                                <tr>
+                                    <td>25.0 – 29.9</td>
+                                    <td>Overweight</td>
+                                </tr>
+                                <tr>
+                                    <td>30.0 – 34.9</td>
+                                    <td>Obesity Class I (Moderate)</td>
+                                </tr>
+                                <tr>
+                                    <td>35.0 – 39.9</td>
+                                    <td>Obesity Class II (Severe)</td>
+                                </tr>
+                                <tr>
+                                    <td>40.0 and above</td>
+                                    <td>Obesity Class III (Very Severe or Morbid)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                                       
+                <span>Blood Glucose Level</span>
+                <p>Blood glucose levels are measured in mg/dL (milligrams per deciliter) or mmol/L (molar). They're used
+                    to assess your overall blood sugar levels and to help you make healthy decisions about your diet,
+                    lifestyle, and medication.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

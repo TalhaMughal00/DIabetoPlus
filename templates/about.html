@@ -1,0 +1,38 @@
+{% extends "base-sp.html" %} 
+{% load static %} 
+{% block title %}DiabetoPlus | About{% endblock title %} 
+
+
+{% block content %}
+
+<!-- about section -->
+
+<section class="about_section layout_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img-box">
+          <img src={% static 'media/about-img.jpg' %} alt="" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>About <span>Us</span></h2>
+          </div>
+          <p>
+            At GlucoInsight, our mission is to transform diabetes care through innovative and personalized technology. We are committed to empowering people with diabetes and those at risk by providing innovative tools for better treatment and management.
+            <br>
+            GlucoInsight was founded by a team of healthcare professionals and technology experts out of a need to address the growing challenges of diabetes care. Our founders recognize that technology has the potential to transform diabetes care, so our platform is designed to provide actionable insights and personalized advice.
+            <br>
+            We welcome your questions, feedback, and suggestions. Connect with us or follow us on Social media for the latest updates and support.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end about section -->
+
+{% endblock content %}

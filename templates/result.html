@@ -1,0 +1,12 @@
+{% extends "base-sp.html" %} 
+{% load static %} 
+{% block title %}DiabetoPlus | Results{% endblock title %} 
+
+{% block content %}
+
+<div class="container">
+    <h1>Prediction Result</h1>
+    <p>The prediction is: <strong>{{ result }}</strong></p>
+    <a href="{% url 'predict_diabetes' %}">Try Again</a>
+</div>
+{% endblock content %}

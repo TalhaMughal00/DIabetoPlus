@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}DiabetoPlus{% endblock title %}
+
+{% block content %}
+<!-- Intro section -->
+<div class="container slider_section">
+  <div class="detail-box">
+    <h1>Stay Ahead of Diabetes <br /> with DiabetoPlus</h1>
+    <p>At DiabetoPlus, we believe that managing diabetes shouldn't hold you back from living your best life. That's why
+      we're dedicated to providing innovative solutions that empower individuals to take control of their health. With
+      our cutting-edge technology and personalized approach, we're committed to helping you stay ahead of diabetes and
+      live a life full of possibilities.</p>
+    <div class="btn-box">
+      <a href={% url 'predict_diabetes' %} class="btn1">Get Your Diabetes Predicted</a>
+    </div>
+    <p>Note! You have to be Logged in to use Further Features/Tools</p>
+  </div>
+</div>
+</div>
+<!-- End Intro section -->
+
+<!-- Previous Predictions -->
+<div class="container container_predictions my-5">
+  <h2 class="text-center mb-4">Your Previous Predictions</h2>
+  <div class="table-responsive">
+    {% if request.user.is_authenticated%}
+    {% if no_data_message %}
+    <p>{{ no_data_message }}</p>
+    {% else %}
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Date</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>BMI</th>
+          <th>Hypertension</th>
+          <th>Blood Glucose Level</th>
+          <th>Prediction</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prediction in predictions %}
+        <tr>
+          <td>{{ prediction.date }}</td>
+          <td>{{ prediction.gender }}</td>
+          <td>{{ prediction.age }}</td>
+          <td>{{ prediction.bmi }}</td>
+          <td>{{ prediction.hypertension }}</td>
+          <td>{{ prediction.blood_glucose_level }}</td>
+          <td>
+            <span
+              class="badge {% if prediction.prediction_result == 'You are at the risk of Diabetes' %}bg-danger{% else %}bg-success{% endif %}">
+              {{ prediction.prediction_result }}
+            </span>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+      <i class="fa-solid fa-trash" style="margin-right: 0.5rem;"></i>Clear Predictions
+    </button>
+    {% else %}
+    <P>{{no_data_message}}</P>
+    {% endif %}
+  </div>
+</div>
+<!-- End Previous Predictions -->
+
+<!-- Records -->
+<div class="container container_predictions my-5">
+  <h2 class="text-center mb-4">Your Glucose Records</h2>
+  <div class="table-responsive">
+    {% if request.user.is_authenticated %}
+    {% if no_records_message %}
+    <p>{{ no_records_message }}</p>
+    {% else %}
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th rowspan="2">Date</th>
+          <th colspan="2">Morning</th>
+          <th rowspan="2">Evening</th>
+          <th colspan="2">Night</th>
+        </tr>
+        <tr>
+          <th>Fasting</th>
+          <th>After Fasting</th>
+          <th>Fasting</th>
+          <th>After Fasting</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in user_records %}
+        <tr>
+          <td>{{ record.date }}</td>
+          <td>{{ record.mor_fast }}</td>
+          <td>{{ record.mor_after }}</td>
+          <td>{{ record.evening }}</td>
+          <td>{{ record.night_fast }}</td>
+          <td>{{ record.night_after }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    <div class="update-pagination-container">
+      <a href="{% url 'record' %}">
+        Update Records
+      </a>
+      <div class="pagination">
+        {% if user_records.has_previous %}
+        <a class="round" href="?page=1">
+          <i class="fa-solid fa-backward"></i>
+        </a>
+        <a class="round" href="?page={{ user_records.previous_page_number }}">
+          <i class="fa-solid fa-caret-left"></i>
+        </a>
+        {% endif %}
+        <a class="round active" href="?page={{ num }}">{{ user_records.number }}</a>
+        {% if user_records.has_next %}
+        <a class="round" href="?page={{ user_records.next_page_number }}">
+          <i class="fa-solid fa-caret-right"></i>
+        </a>
+        <a class="round" href="?page={{ user_records.paginator.num_pages }}">
+          <i class="fa-solid fa-forward"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <p>{{ no_records_message }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- End Records -->
+
+<!-- about section -->
+<section class="about_section layout_margin-bottom">
+  <div class="container  ">
+    <div class="row">
+      <div class="col-md-6 ">
+        <div class="img-box">
+          <img src={% static "media/about-img.jpg" %} alt="" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              About <span>Us</span>
+            </h2>
+          </div>
+          <p>
+            At DiabetoPlus, our mission is to transform diabetes care through innovative and personalized technology.
+            We are committed to empowering people with diabetes and those at risk by providing innovative tools for
+            better treatment and management.
+          </p>
+          <a href={% url 'about' %}>
+            Read More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end about section -->
+
+<!-- contact section -->
+<section class="contact_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2>Leave A Feedback</h2>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form_container contact-form">
+          <form action={% url 'send_feedback' %} method="POST">
+            {% csrf_token %} 
+            <textarea class="form-control message-box" placeholder="Enter your Feedback" name="feed"></textarea>
+            <div class="btn_box">
+              <button type="submit" class="btn btn-primary">
+                SEND
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Confirm Action</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to clear the predictions?</p>
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="{% url 'clear_prediction' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Yes, clear them</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end contact section -->
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends "base-sp.html" %} 
+{% load static %} 
+{% block title %}DiabetoPlus | Login{% endblock title %} 
+
+{% block content %}
+
+<div class="container login_form">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Login Here</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="" class="control-label">Email :</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your Email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Password :</label>
+                            <input type="password" id="pass1" class="form-control" placeholder="Enter Password" name="pass1">
+                        </div>
+                        <button type="submit" class="btn btn-block">Login</button>
+                    </form>
+                    <p class="text-center">Don't Have an account? <a href={% url 'sign_up' %} class="text-decoration-none">Sign Up here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
