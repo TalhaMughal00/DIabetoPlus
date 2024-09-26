@@ -813,4 +813,53 @@ th {
   color: white;
 }
 
+/* Cards */
+
+.card-hover {
+  transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+}
+
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  filter: brightness(100%);
+}
+
+.overlay-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+}
+
+.card-title{
+  color: #1fab89;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #fff;
+  font-weight: bold;
+}
+
+.card-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.card-btn {
+  background-color: #62d2a2;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #62d2a2;
+  border-radius: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.card-btn:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+
 

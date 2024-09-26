@@ -136,8 +136,38 @@
     {% endif %}
   </div>
 </div>
-
 <!-- End Records -->
+
+<!-- Cards section -->
+<div class="cards container mb-5">
+  <div class="row">
+    <div class="col-sm-6 mb-4">
+      <div class="card text-white card-hover">
+        <img src="{% static 'media/Diet.png' %}" class="card-img" height="250px">
+        <div class="card-img-overlay overlay-bg d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title" style="font-size: 30px;">Diet Plan</h5>
+            <p class="card-text">A personalized diet plan tailored to support healthy blood glucose levels, offering balanced meals recommendations based on your diabetes prediction. It helps manage blood sugar effectively while ensuring you get essential nutrients.</p>
+          </div>
+          <a href="#" class="btn card-btn mt-2 align-self-start">Get Plan</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <div class="card text-white card-hover">
+        <img src="{% static 'media/exercise.png' %}" class="card-img" height="250px">
+        <div class="card-img-overlay overlay-bg d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title" style="font-size: 30px;">Exercise Plan</h5>
+            <p class="card-text">A custom exercise routine designed to improve insulin sensitivity and maintain optimal blood sugar. It includes a mix of aerobic, strength, and flexibility exercises tailored to your fitness level and daily schedule.</p>
+          </div>
+          <a href="#" class="btn card-btn mt-2 align-self-start">Get Plan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Cards section -->
 
 <!-- about section -->
 <section class="about_section layout_margin-bottom">
@@ -169,25 +199,6 @@
   </div>
 </section>
 <!-- end about section -->
-
-<!-- Card section -->
-<div class="container mt-5">
-  <div class="card">
-    <div class="row">
-      <div class="col-md-6">
-        <img src="{% static 'media/Diet.png' %}" class="img-fluid rounded-start" style="height: 100%;"">
-      </div>
-      <div class="col-md-6">
-        <div class="card-body">
-          <h5 class="card-title-black">Personalized Plans</h5>
-          <p class="card-text-black">Manage your diabetes effectively with a personalized plan that includes both a tailored diet and a custom exercise routine. Our diet plan supports healthy blood glucose levels with balanced meals, while the exercise routine improves insulin sensitivity with a mix of aerobic, strength, and flexibility exercises..</p>
-          <a href=""><button class="btn btn-primary">Get Plans</button></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Card section -->
 
 <!-- contact section -->
 <section class="contact_section layout_padding">
