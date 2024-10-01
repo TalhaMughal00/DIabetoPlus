@@ -16,4 +16,3 @@ class MealPlannerForm(forms.Form):
     height_inches = forms.IntegerField(label="Height (inches)")
     age = forms.IntegerField(label="Age")
     activity_level = forms.ChoiceField(choices=ACTIVITY_CHOICES)
-    is_diabetic = forms.BooleanField(label="Are you diabetic?", required=False)

@@ -33,21 +33,11 @@ def calculate_bmi(weight, height_cm):
     return weight / (height_m ** 2)
 
 # Function to recommend diet based on BMI and diabetes status
-def get_diet_type(bmi, is_diabetic):
-    if is_diabetic:
-        if bmi >= 30:
-            return 'low-carb'
-        elif bmi >= 25:
-            return 'low-fat'
-        else:
-            return 'balanced'
+def get_diet_type(bmi):
+    if bmi >= 30:
+        return 'low-carb'
     else:
-        if bmi >= 30:
-            return 'low-carb'
-        elif bmi >= 25:
-            return 'low-fat'
-        else:
-            return 'balanced'
+        return 'balanced'
 
 # Function to fetch meal plans for specific meal types
 def get_meal_by_type(target_calories, diet_type, exclude_ingredients, meal_type):
@@ -96,7 +86,6 @@ def meal_planner(request):
             height_inches = form.cleaned_data['height_inches']
             age = form.cleaned_data['age']
             activity_level = form.cleaned_data['activity_level']
-            is_diabetic = form.cleaned_data['is_diabetic']
             exclude_ingredients = "Pork,Bacon"
 
             # Convert height to centimeters
@@ -109,7 +98,7 @@ def meal_planner(request):
             bmi = calculate_bmi(weight, height_cm)
             
             # Determine diet type
-            diet_type = get_diet_type(bmi, is_diabetic)
+            diet_type = get_diet_type(bmi)
             
             # Fetch meal plans
             breakfast_plan = get_meal_by_type(int(bmr), diet_type, exclude_ingredients, 'breakfast')
