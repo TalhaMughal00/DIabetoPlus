@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Meal Planner</title>
-</head>
-<body>
+{% extends "base-sp.html" %} 
+{% load static %} 
+{% block title %}DiabetoPlus | Meal Planner{% endblock title %} 
+
+{% block content %}
+<div class="mealplaner container">
     <h1>Meal Planner</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Get Meal Plan</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Get Meal Plan</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock content %}
