@@ -19,24 +19,34 @@ from django.urls import path
 from Home import views as home_views
 from predictor import views as predictor_views
 from Glucose_Record import views as Glucose_Record_views
+from recommendations import views as recommendations_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home_views.index , name='index'),
     path('about/', home_views.about , name='about'),
+    # Feadback
     path('send_feedback/', home_views.send_feedback, name='send_feedback'),
-    path('prediction/', predictor_views.predict_diabetes , name='predict_diabetes'),
+    # Calculate Insulin
     path('calculate_insulin/', home_views.calculate_insulin , name='calculate_insulin'),
+    # New Diabetics Info Page
     path('new_diabetics/', home_views.new_diabtetics , name='new_diabetics'),
+    # User Login and SigUp
     path('login/', home_views.login_view, name='login'),
     path('sign_up/', home_views.sign_up, name='sign_up'),
     path('logout/', home_views.logout_view, name='logout'),
     path('change_password/', home_views.change_password, name='change_password'),
+    # Prediction
+    path('prediction/', predictor_views.predict_diabetes , name='predict_diabetes'),
     path('clear_predcition/',predictor_views.clear_prediction, name='clear_prediction'),
+    # Records
     path('record/',Glucose_Record_views.record, name='record'),
     path('add_record/', Glucose_Record_views.add_record, name="add_record"),
     path('clear_records/', Glucose_Record_views.clear_records, name="clear_records"),
     path('delete_record/<int:pk>/', Glucose_Record_views.delete_record, name='delete_record'),
     path('record/update/<int:pk>/', Glucose_Record_views.update_record, name='update_record'),
-    path('gen_pdf/', Glucose_Record_views.gen_pdf, name='gen_pdf')
+    # PDF Generating
+    path('gen_pdf/', Glucose_Record_views.gen_pdf, name='gen_pdf'),
+    # Meal Planner
+    path('mealplaner/', recommendations_views.meal_planner, name='mealplaner')
 ]
