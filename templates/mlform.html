@@ -3,12 +3,14 @@
 {% block title %}DiabetoPlus | Meal Planner{% endblock title %} 
 
 {% block content %}
-<div class="mealplaner container">
-    <h1>Meal Planner</h1>
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Get Meal Plan</button>
+<div class="mealplaner container my-4">
+    <h1 class="text-center mb-4">Meal Planner</h1>
+    <form method="post" class="bg-light p-4 border rounded shadow">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Get Meal Plan</button>
     </form>
 </div>
 {% endblock content %}
