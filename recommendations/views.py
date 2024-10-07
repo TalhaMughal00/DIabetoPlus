@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import MealPlannerForm
+from .forms import BMICalculatorForm
 import requests
+import random
 
 # Your Spoonacular API key
 API_KEY = '789f7c2f742647cd8f9ac19833bd9323'
@@ -77,6 +79,9 @@ def convert_height_to_cm(feet, inches):
     return total_inches * 2.54  # Convert inches to centimeters
 
 def meal_planner(request):
+    form = MealPlannerForm()
+    breakfast_plan = lunch_plan = dinner_plan = bmr = bmi = diet_type = None  # Initialize variables
+
     if request.method == 'POST':
         form = MealPlannerForm(request.POST)
         if form.is_valid():
@@ -107,17 +112,85 @@ def meal_planner(request):
 
             bmr = format(bmr, '.2f')
             bmi = format(bmi, '.2f')
-            
-            # Render the result page
-            return render(request, 'mlresult.html', {
-                'bmr': bmr,
-                'bmi': bmi,
-                'diet_type': diet_type,
-                'breakfast_plan': breakfast_plan,
-                'lunch_plan': lunch_plan,
-                'dinner_plan': dinner_plan
-            })
-    else:
-        form = MealPlannerForm()
     
-    return render(request, 'mlform.html', {'form': form})
+    # Render the form and meal plan results in the same template
+    return render(request, 'mlform.html', {
+        'form': form,
+        'bmr': bmr,
+        'bmi': bmi,
+        'diet_type': diet_type,
+        'breakfast_plan': breakfast_plan,
+        'lunch_plan': lunch_plan,
+        'dinner_plan': dinner_plan
+    })
+
+# Exercise Routine 
+def get_exercises(body_parts=None, equipment=None, limit=8, offset=0):
+    url = "https://exercisedb.p.rapidapi.com/exercises"
+    headers = {
+        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        "X-RapidAPI-Key": "9a73ff69e1msh0f3b85796099b8fp17e6e3jsnb39db174541b"
+    }
+    params = {'limit': limit, 'offset': offset}
+    
+    if body_parts:
+        params['bodyPart'] = body_parts
+    if equipment:
+        params['equipment'] = equipment
+
+    response = requests.get(url, headers=headers, params=params)
+    
+    if response.status_code == 200:
+        exercises = response.json()
+        return exercises
+    else:
+        return None
+
+def determine_intensity(bmi):
+    if bmi < 18.5:
+        return "Low"
+    elif 18.5 <= bmi < 24.9:
+        return "Moderate"
+    elif 25 <= bmi < 29.9:
+        return "High"
+    else:
+        return "Very High"
+
+def exercise_view(request):
+    form = BMICalculatorForm()
+    exercises = []
+    intensity = None
+    
+    if request.method == 'POST':
+        form = BMICalculatorForm(request.POST)
+        
+        if form.is_valid():
+            # Get form data
+            feet = form.cleaned_data['feet']
+            inches = form.cleaned_data['inches']
+            weight = form.cleaned_data['weight']
+
+            # Convert height to cm and calculate BMI
+            height_cm = convert_height_to_cm(feet, inches)
+            bmi = calculate_bmi(weight, height_cm)
+            intensity = determine_intensity(bmi)
+
+            # Fetch exercises
+            body_parts = ['chest', 'back', 'legs', 'arms', 'core']
+            equipment_options = ['none', 'dumbbell', 'barbell', 'kettlebell', 'resistance band', 'medicine ball']
+
+            fetched_exercises_count = 0
+            total_exercises_to_fetch = 8
+
+            while fetched_exercises_count < total_exercises_to_fetch:
+                body_part = random.choice(body_parts)
+                equipment = random.choice(equipment_options)
+                limit = total_exercises_to_fetch - fetched_exercises_count
+                
+                fetched_exercises = get_exercises(body_parts=body_part, equipment=equipment, limit=limit)
+
+                if fetched_exercises:
+                    exercises.extend(fetched_exercises)
+                    fetched_exercises_count += len(fetched_exercises)
+
+    return render(request, 'exercise.html', {'form': form, 'exercises': exercises, 'intensity': intensity})

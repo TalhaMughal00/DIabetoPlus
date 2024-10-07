@@ -20,6 +20,13 @@ from Home import views as home_views
 from predictor import views as predictor_views
 from Glucose_Record import views as Glucose_Record_views
 from recommendations import views as recommendations_views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # other patterns...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -48,5 +55,9 @@ urlpatterns = [
     # PDF Generating
     path('gen_pdf/', Glucose_Record_views.gen_pdf, name='gen_pdf'),
     # Meal Planner
-    path('mealplaner/', recommendations_views.meal_planner, name='mealplaner')
-]
+    path('mealplaner/', recommendations_views.meal_planner, name='mealplaner'),
+    # Exercise Planner
+    path('exercise/', recommendations_views.exercise_view, name='exercise'),
+    # Profile Page
+    path('profile/', home_views.profile, name="profile")
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

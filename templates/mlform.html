@@ -1,16 +1,118 @@
-{% extends "base-sp.html" %} 
-{% load static %} 
-{% block title %}DiabetoPlus | Meal Planner{% endblock title %} 
+{% extends "base-sp.html" %}
+{% load static %}
+{% block title %}DiabetoPlus | Meal Planner{% endblock title %}
 
 {% block content %}
-<div class="mealplaner container my-4">
-    <h1 class="text-center mb-4">Meal Planner</h1>
-    <form method="post" class="bg-light p-4 border rounded shadow">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p }}
+<div class="container login_form">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Plan Your Meals</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="gender" class="form-label">Gender:</label>
+                            <select id="gender" class="form-control" name="gender" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight" class="form-label">Weight (kg):</label>
+                            <input type="number" id="weight" class="form-control" placeholder="Enter your weight in kg" name="weight" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="height_feet" class="form-label">Height (Feet):</label>
+                            <input type="number" id="height_feet" class="form-control" placeholder="Enter height in feet" name="height_feet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="height_inches" class="form-label">Height (Inches):</label>
+                            <input type="number" id="height_inches" class="form-control" placeholder="Enter height in inches" name="height_inches" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age" class="form-label">Age:</label>
+                            <input type="number" id="age" class="form-control" placeholder="Enter your age" name="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity_level" class="form-label">Activity Level:</label>
+                            <select id="activity_level" class="form-control" name="activity_level" required>
+                                <option value="sedentary">Sedentary</option>
+                                <option value="lightly active">Lightly Active</option>
+                                <option value="moderately active">Moderately Active</option>
+                                <option value="very active">Very Active</option>
+                                <option value="super active">Super Active</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-primary">Get Meal Plan</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Get Meal Plan</button>
-    </form>
+    </div>
+    <hr>
+
+    <!-- Display BMR, BMI, and Diet Type -->
+    {% if bmr and bmi %}
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 text-center">
+            <h2>Meal Plan Results</h2>
+            <p><strong>BMR:</strong> {{ bmr }} kcal/day</p>
+            <p><strong>BMI:</strong> {{ bmi }}</p>
+            <p><strong>Diet Type:</strong> {{ diet_type }}</p>
+        </div>
+    </div>
+
+    <!-- Display Meal Plans in Cards -->
+    <h1 class="text-center">Recommended Meals</h1>
+
+    <h2 class="text-center">Breakfast</h2>
+    <div class="row my-4">
+        {% for meal in breakfast_plan %}
+        <div class="col-md-4">
+            <div class="card my-3" style="height: 230px;">
+                <div class="card-body">
+                    <h5 style="font-weight: bold;">{{ meal.title }}</h5>
+                    <p><strong>Ready in:</strong> {{ meal.readyInMinutes }} minutes</p>
+                    <p><strong>Servings:</strong> {{ meal.servings }}</p>
+                    <a href="{{ meal.sourceUrl }}" class="btn btn-block" target="_blank">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="text-center">Lunch</h2>
+    <div class="row my-4">
+        {% for meal in lunch_plan %}
+        <div class="col-md-4">
+            <div class="card my-3" style="height: 230px;">
+                <div class="card-body">
+                    <h5 style="font-weight: bold;">{{ meal.title }}</h5>
+                    <p><strong>Ready in:</strong> {{ meal.readyInMinutes }} minutes</p>
+                    <p><strong>Servings:</strong> {{ meal.servings }}</p>
+                    <a href="{{ meal.sourceUrl }}" class="btn btn-block" target="_blank">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="text-center">Dinner</h2>
+    <div class="row my-4">
+        {% for meal in dinner_plan %}
+        <div class="col-md-4">
+            <div class="card my-3" style="height: 230px;">
+                <div class="card-body">
+                    <h5 style="font-weight: bold;">{{ meal.title }}</h5>
+                    <p><strong>Ready in:</strong> {{ meal.readyInMinutes }} minutes</p>
+                    <p><strong>Servings:</strong> {{ meal.servings }}</p>
+                    <a href="{{ meal.sourceUrl }}" class="btn btn-block" target="_blank">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}

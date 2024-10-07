@@ -1,12 +1,48 @@
-{% extends "base-sp.html" %} 
-{% load static %} 
-{% block title %}DiabetoPlus | Results{% endblock title %} 
+{% extends "base-sp.html" %}
+{% load static %}
+{% block title %}DiabetoPlus | Results{% endblock title %}
 
 {% block content %}
 
-<div class="container">
+<div class="container my-4">
     <h1>Prediction Result</h1>
-    <p>The prediction is: <strong>{{ result }}</strong></p>
+    <p>The prediction is: <span
+            class="badge {% if result == 'You are at the risk of Diabetes' %}bg-danger{% else %}bg-success{% endif %}">
+            {{ result }}
+        </span></p>
     <a href="{% url 'predict_diabetes' %}">Try Again</a>
+</div>
+
+<div class="cards container mb-5">
+    <div class="row">
+        <div class="col-sm-6 mb-4">
+            <div class="card text-white card-hover">
+                <img src="{% static 'media/Diet.png' %}" class="card-img" height="250px">
+                <div class="card-img-overlay overlay-bg d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title" style="font-size: 30px;">Diet Plan</h5>
+                        <p class="card-text">A personalized diet plan tailored to support healthy blood glucose levels,
+                            offering balanced meals recommendations based on your diabetes prediction. It helps manage
+                            blood sugar effectively while ensuring you get essential nutrients.</p>
+                    </div>
+                    <a href="{% url 'mealplaner' %}" class="btn card-btn mt-2 align-self-start">Get Meal Plan</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mb-4">
+            <div class="card text-white card-hover">
+                <img src="{% static 'media/exercise.png' %}" class="card-img" height="250px">
+                <div class="card-img-overlay overlay-bg d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title" style="font-size: 30px;">Exercise Plan</h5>
+                        <p class="card-text">A custom exercise routine designed to improve insulin sensitivity and
+                            maintain optimal blood sugar. It includes a mix of aerobic, strength, and flexibility
+                            exercises tailored to your fitness level and daily schedule.</p>
+                    </div>
+                    <a href="{% url 'exercise' %}" class="btn card-btn mt-2 align-self-start">Get Exercise Plan</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

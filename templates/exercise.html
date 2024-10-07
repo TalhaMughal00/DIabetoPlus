@@ -1,0 +1,59 @@
+{% extends "base-sp.html" %}
+{% load static %}
+{% block title %}DiabetoPlus | Exercise Planner{% endblock title %}
+
+{% block content %}
+<div class="container login_form">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Plan Your Exercises</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="feet" class="form-label">Height (Feet):</label>
+                            <input type="number" id="feet" class="form-control" placeholder="Enter height in feet" name="feet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inches" class="form-label">Height (Inches):</label>
+                            <input type="number" id="inches" class="form-control" placeholder="Enter height in inches" name="inches" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight" class="form-label">Weight (kg):</label>
+                            <input type="number" id="weight" class="form-control" placeholder="Enter your weight in kg" name="weight" required>
+                        </div>
+                        <button type="submit" class="btn btn-block">Get Exercises</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Display suggested intensity -->
+    {% if intensity %}
+    <h1 class="text-center">Recomended Exerxises</h1>
+    <h2 class="text-center">Suggested Intensity: {{ intensity }}</h2>
+    {% endif %}
+
+    <!-- Display the fetched exercises -->
+    {% if exercises %}
+    <div class="row my-4">
+        {% for exercise in exercises %}
+        <div class="col-md-3 exercise-card">
+            <div class="card my-3">
+                <img src="{{ exercise.gifUrl }}" alt="{{ exercise.name }}" class="card-img-top">
+                <div class="card-body">
+                    <h5><strong style="color: #178066;">{{ exercise.name }}</strong></h5>
+                    <p><strong>Body Part:</strong> {{ exercise.bodyPart }}</p>
+                    <p><strong>Equipment:</strong> {{ exercise.equipment }}</p>
+                    <a href="{{ exercise.gifUrl }}" class="btn btn-block" target="_blank">View Full GIF</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

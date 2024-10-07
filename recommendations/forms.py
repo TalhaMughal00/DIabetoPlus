@@ -16,3 +16,8 @@ class MealPlannerForm(forms.Form):
     height_inches = forms.IntegerField(label="Height (inches)")
     age = forms.IntegerField(label="Age")
     activity_level = forms.ChoiceField(choices=ACTIVITY_CHOICES)
+    
+class BMICalculatorForm(forms.Form):
+    feet = forms.IntegerField(label="Height (feet)", min_value=0)
+    inches = forms.IntegerField(label="Height (inches)", min_value=0, max_value=11)
+    weight = forms.FloatField(label="Weight (kg)", min_value=0.0)
