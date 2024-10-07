@@ -11,3 +11,4 @@ class feedback(models.Model):
     
     def __str__(self):
         return self.feed[:50]
+    
