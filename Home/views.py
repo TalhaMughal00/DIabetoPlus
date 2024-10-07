@@ -164,5 +164,39 @@ def send_feedback(request):
     return render(request, 'index.html')
 
 def profile(request):
-    
-    return render(request, 'profile.html')
+    user = request.user
+
+    if request.method == 'POST':
+        new_username = request.POST.get('username')
+        new_email = request.POST.get('email')
+
+        # Check if the username is the same
+        if new_username == user.username and new_email == user.email:
+            messages.warning(request, 'You have not changed your username or email.')
+            return redirect('profile')
+
+        # Validate username change
+        if new_username != user.username:
+            if User.objects.filter(username=new_username).exists():
+                messages.error(request, 'Username already taken. Please choose a different one.')
+                return redirect('profile')
+
+        # Validate email change
+        if new_email != user.email:
+            if User.objects.filter(email=new_email).exists():
+                messages.error(request, 'Email already registered. Please choose a different one.')
+                return redirect('profile')
+
+        # Update user details only if they are changed
+        if new_username != user.username:
+            user.username = new_username
+        
+        if new_email != user.email:
+            user.email = new_email
+        
+        user.save()
+        
+        messages.success(request, 'Profile updated successfully!')
+        return redirect('profile')  # Redirect to a profile page or wherever you'd like
+
+    return render(request, 'profile.html', {'user': user})

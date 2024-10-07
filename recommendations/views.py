@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .forms import MealPlannerForm
 from .forms import BMICalculatorForm
 import requests
@@ -78,6 +79,7 @@ def convert_height_to_cm(feet, inches):
     total_inches = (feet * 12) + inches
     return total_inches * 2.54  # Convert inches to centimeters
 
+@login_required
 def meal_planner(request):
     form = MealPlannerForm()
     breakfast_plan = lunch_plan = dinner_plan = bmr = bmi = diet_type = None  # Initialize variables
@@ -156,6 +158,7 @@ def determine_intensity(bmi):
     else:
         return "Very High"
 
+@login_required
 def exercise_view(request):
     form = BMICalculatorForm()
     exercises = []
