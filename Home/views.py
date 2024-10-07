@@ -10,7 +10,6 @@ from Glucose_Record.models import GRecords
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from Home.models import feedback
 from django.db import IntegrityError
-from .forms import UserUpdateForm, ProfileUpdateForm, PasswordUpdateForm
 
 def index(request):
     user_predictions = None
@@ -165,25 +164,5 @@ def send_feedback(request):
     return render(request, 'index.html')
 
 def profile(request):
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        password_form = PasswordUpdateForm(user=request.user, data=request.POST)
-
-        if user_form.is_valid() and profile_form.is_valid() and password_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            password_form.save()
-            update_session_auth_hash(request, password_form.user)  # Keep the user logged in after password change
-            return redirect('profile')  # Redirect to profile or a confirmation page
-    else:
-        user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile)
-        password_form = PasswordUpdateForm(user=request.user)
-
-    context = {
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'password_form': password_form,
-    }
-    return render(request, 'profile.html' ,context)
+    
+    return render(request, 'profile.html')

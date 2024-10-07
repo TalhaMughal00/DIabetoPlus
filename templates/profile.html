@@ -9,7 +9,7 @@
             <img src="" alt="Profile Image" class="profile-image mb-3">
             <h3 id="username" style="font-weight: bold;">{{ request.user.username }}</h3>
             <p id="email">{{ request.user.email }}</p>
-            <a href="{% url " change_password" %}"><button class="btn btn-primary">Change Password</button></a>
+            <a href="{% url "change_password" %}"><button class="btn btn-primary">Change Password</button></a>
         </div>
         <div class="col-md-10">
             <ul class="nav nav-tabs" id="profileTab" role="tablist">
@@ -23,7 +23,7 @@
                     <a class="nav-link" data-bs-toggle="tab" href="#exercise" role="tab">Exercise Plan</a>
                 </li>
                 <li class="nav-item"></li>
-                <a class="nav-link" data-bs-toggle="tab" href="#uprofile" role="tab">Update Profile</a>
+                    <a class="nav-link" data-bs-toggle="tab" href="#uprofile" role="tab">Update Profile</a>
                 </li>
             </ul>
             <div class="tab-content mt-2">
@@ -40,40 +40,8 @@
                     <p>View and manage your feedback here.</p>
                 </div>
                 <div class="tab-pane fade" id="uprofile" role="tabpanel">
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            {{ user_form.username }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            {{ user_form.email }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="profile_image">Profile Picture:</label>
-                            {{ profile_form.profile_image }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="old_password">Old Password:</label>
-                            {{ password_form.old_password }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new_password1">New Password:</label>
-                            {{ password_form.new_password1 }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new_password2">Confirm New Password:</label>
-                            {{ password_form.new_password2 }}
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
-                    </form>
+                    <h4>Update Profiel</h4>
+                    <p>View and manage your Profile here.</p>
                 </div>
             </div>
         </div>

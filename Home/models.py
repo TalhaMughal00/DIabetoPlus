@@ -11,10 +11,3 @@ class feedback(models.Model):
     
     def __str__(self):
         return self.feed[:50]
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='profile_images/', default='default.jpg')
-
-    def __str__(self):
-        return self.user.username
