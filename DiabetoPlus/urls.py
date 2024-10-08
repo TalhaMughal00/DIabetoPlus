@@ -20,6 +20,8 @@ from Home import views as home_views
 from predictor import views as predictor_views
 from Glucose_Record import views as Glucose_Record_views
 from recommendations import views as recommendations_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -52,5 +54,7 @@ urlpatterns = [
     # Exercise Planner
     path('exercise/', recommendations_views.exercise_view, name='exercise'),
     # Profile Page
-    path('profile/', home_views.profile, name="profile")
-]
+    path('profile/', home_views.profile, name="profile"),
+    # Update Profile Picture
+    path('profile/picture/', home_views.profile_pic, name='profile_pic'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

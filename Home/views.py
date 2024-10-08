@@ -9,6 +9,7 @@ from predictor.models import Predictions
 from Glucose_Record.models import GRecords
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from Home.models import feedback
+from Home.models import Profile
 from django.db import IntegrityError
 
 def index(request):
@@ -163,14 +164,16 @@ def send_feedback(request):
             return redirect('index')
     return render(request, 'index.html')
 
+@login_required
 def profile(request):
     user = request.user
 
     if request.method == 'POST':
-        new_username = request.POST.get('username')
-        new_email = request.POST.get('email')
+        # Safely get username and email, default to an empty string if None
+        new_username = request.POST.get('username', '').strip()
+        new_email = request.POST.get('email', '').strip()
 
-        # Check if the username is the same
+        # Check if the username and email are the same as before
         if new_username == user.username and new_email == user.email:
             messages.warning(request, 'You have not changed your username or email.')
             return redirect('profile')
@@ -188,15 +191,28 @@ def profile(request):
                 return redirect('profile')
 
         # Update user details only if they are changed
-        if new_username != user.username:
-            user.username = new_username
-        
-        if new_email != user.email:
-            user.email = new_email
-        
+        user.username = new_username
+        user.email = new_email
         user.save()
-        
+
         messages.success(request, 'Profile updated successfully!')
-        return redirect('profile')  # Redirect to a profile page or wherever you'd like
+        return redirect('profile')
 
     return render(request, 'profile.html', {'user': user})
+
+
+@login_required
+def profile_pic(request):
+    # Ensure the user has a profile
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        if 'profile_picture' in request.FILES:
+            profile.profile_picture = request.FILES['profile_picture']
+            profile.save()
+            messages.success(request, 'Your profile picture has been updated.')
+        else:
+            messages.error(request, 'Please upload a valid profile picture.')
+        return redirect('profile')
+
+    return render(request, 'profile.html')
