@@ -69,10 +69,16 @@
             </ul>
             {% if request.user.is_authenticated %}
             <div class="dropdown">
-              <button class="btn-read-more" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-user" style="margin-right: 7px;"></i>
-                {{ request.user.username }}
-              </button>
-              <ul class="dropdown-menu">
+              <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if user.profile.profile_picture %}
+                  <img src="{{ user.profile.profile_picture.url }}" class="profile-pic-nav" alt="Profile Picture">
+                  <span class="profile-name">{{ user.username }}</span>
+                {% else %}
+                  <img src="{% static 'default.jpg' %}" class="profile-pic-nav" alt="Default Profile Picture">
+                  <span class="profile-name">{{ user.username }}</span>
+                {% endif %}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href={% url "profile" %}><i class="fa-regular fa-user" style="margin-right: 7px;"></i>Profile</a></li>
                 <li><a class="dropdown-item" href={% url "change_password" %}><i class="fa-solid fa-lock" style="margin-right: 7px;"></i>Change Password</a></li>
                 <li><a class="dropdown-item" href={% url 'logout' %}><i class="fa-solid fa-right-from-bracket" style="margin-right: 7px;"></i>Logout</a></li>
