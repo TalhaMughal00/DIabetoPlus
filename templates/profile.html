@@ -1,21 +1,25 @@
 {% extends "base-sp.html" %}
 {% load static %}
 {% block title %}DiabetoPlus | Profile{% endblock title %}
+{% block css %}
+<link href={% static "css/profile.css" %} type="text/css" rel="stylesheet" />
+{% endblock css %}
 
 {% block content %}
 <div class="container my-4">
     <div class="row">
-        <div class="col-md-2 text-center my-3">
+        <div class="col-md-2 text-center my-3 profile-side">
             {% if user.profile.profile_picture %}
-                <img src="{{ user.profile.profile_picture.url }}" class="img-thumbnail profile-pic" alt="Profile Picture">
+            <img src="{{ user.profile.profile_picture.url }}" class="img-thumbnail profile-pic mb-3"
+                alt="Profile Picture">
             {% else %}
-                <img src="{% static 'default.jpg' %}" class="img-thumbnail profile-pic" alt="Default Profile Picture">
+            <img src="{% static 'default.jpg' %}" class="img-thumbnail profile-pic mb-2" alt="Default Profile Picture">
             {% endif %}
             <h3 id="username" style="font-weight: bold;">{{ request.user.username }}</h3>
             <p id="email">{{ request.user.email }}</p>
-            <a href="{% url "change_password" %}"><button class="btn btn-primary">Change Password</button></a>
+            <a href="{% url "change_password" %}">Change Password</a>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 profile-tabs">
             <ul class="nav nav-tabs" id="profileTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-bs-toggle="tab" href="#diet" role="tab">Diet Plan</a>
@@ -28,32 +32,119 @@
                 </li>
             </ul>
             <div class="tab-content mt-2">
+                <!-- Diet Plan -->
                 <div class="tab-pane fade show active" id="diet" role="tabpanel">
-                    <h4>Diet Plan</h4>
-                    <p>View your recent activities.</p>
+                    {% if bmr and bmi %}
+                    <div class="row justify-content-center my-4">
+                        <div class="col-md-6 text-center diet-card">
+                            <h2>Your Diet Plan Results</h2>
+                            <p><strong>CALORIES:</strong> {{ bmr }} kcal/day</p>
+                            <p><strong>BMI:</strong> {{ bmi }}</p>
+                            <p><strong>Diet Type:</strong> {{ diet_type }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Display Meal Plans in Cards -->
+                    <h1 class="text-center">Recommended Meals</h1>
+
+                    <h2 class="text-center">Breakfast</h2>
+                    <div class="row my-4">
+                        {% for meal in breakfast_plan %}
+                        <div class="col-md-4">
+                            <div class="card my-3 diet-card">
+                                <div class="card-body">
+                                    <h5 style="font-weight: bold;">{{ meal.title }}</h5>
+                                    <p><strong>Ready in:</strong> {{ meal.readyInMinutes }} minutes</p>
+                                    <p><strong>Servings:</strong> {{ meal.servings }}</p>
+                                    <a href="{{ meal.sourceUrl }}" class="btn btn-block" target="_blank">View Recipe</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <h2 class="text-center">Lunch</h2>
+                    <div class="row my-4">
+                        {% for meal in lunch_plan %}
+                        <div class="col-md-4 diet-card">
+                            <div class="card my-3">
+                                <div class="card-body">
+                                    <h5 style="font-weight: bold;">{{ meal.title }}</h5>
+                                    <p><strong>Ready in:</strong> {{ meal.readyInMinutes }} minutes</p>
+                                    <p><strong>Servings:</strong> {{ meal.servings }}</p>
+                                    <a href="{{ meal.sourceUrl }}" class="btn btn-block" target="_blank">View Recipe</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <h2 class="text-center">Dinner</h2>
+                    <div class="row my-4">
+                        {% for meal in dinner_plan %}
+                        <div class="col-md-4">
+                            <div class="card my-3 diet-card">
+                                <div class="card-body">
+                                    <h5 style="font-weight: bold;">{{ meal.title }}</h5>
+                                    <p><strong>Ready in:</strong> {{ meal.readyInMinutes }} minutes</p>
+                                    <p><strong>Servings:</strong> {{ meal.servings }}</p>
+                                    <a href="{{ meal.sourceUrl }}" class="btn btn-block" target="_blank">View Recipe</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
+                <!-- Exercise Routine -->
                 <div class="tab-pane fade" id="exercise" role="tabpanel">
-                    <h4>Exercise Plan</h4>
-                    <p>View and manage your feedback here.</p>
+                    {% if intensity %}
+                    <h1 class="text-center">Recommended Exercises</h1>
+                    <h2 class="text-center">Suggested Intensity: {{ intensity }}</h2>
+                    {% endif %}
+                    {% if exercises %}
+                    <div class="row my-4">
+                        {% for exercise in exercises %}
+                        <div class="col-md-3 exercise-card">
+                            <div class="card my-3">
+                                <img src="{{ exercise.gifUrl }}" alt="{{ exercise.name }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5><strong style="color: #178066;">{{ exercise.name }}</strong></h5>
+                                    <p><strong>Body Part:</strong> {{ exercise.bodyPart }}</p>
+                                    <p><strong>Equipment:</strong> {{ exercise.equipment }}</p>
+                                    <a href="{{ exercise.gifUrl }}" class="btn btn-block" target="_blank">View Full
+                                        GIF</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p style="color: black !important;">You have not created an exercise routine yet.</p>
+                    {% endif %}
                 </div>
+                <!-- Update Profile -->
                 <div class="tab-pane fade" id="uprofile" role="tabpanel">
-                    <form method="POST" enctype="multipart/form-data" action="{% url 'profile_pic' %}" class="login_form">
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'profile_pic' %}"
+                        class="login_form">
                         {% csrf_token %}
                         <div>
                             <label for="profile_picture" class="mb-2">Profile Picture:</label>
                             <input type="file" name="profile_picture" id="profile_picture" required>
                         </div>
                         <button type="submit" class="btn btn-block mt-3">Upload</button>
-                    </form>                      
+                    </form>
                     <form method="POST" class="login_form">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+                            <input type="text" class="form-control" id="username" name="username"
+                                value="{{ user.username }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}"
+                                required>
                         </div>
                         <button type="submit" class="btn btn-block">Update</button>
                     </form>

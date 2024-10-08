@@ -21,6 +21,8 @@
   <link href={% static "css/style.css" %} type="text/css" rel="stylesheet" />
   <!-- responsive style -->
   <link href={% static "css/responsive.css" %} rel="stylesheet" />
+  <!-- Specific Page Styling -->
+  {% block css %}{% endblock css %}
   <!-- Toastr CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>

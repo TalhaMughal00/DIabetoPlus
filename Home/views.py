@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from Home.models import feedback
 from Home.models import Profile
 from django.db import IntegrityError
+from recommendations.models import ER,DP
 
 def index(request):
     user_predictions = None
@@ -167,6 +168,20 @@ def send_feedback(request):
 @login_required
 def profile(request):
     user = request.user
+    exercise_routine = None  # Initialize exercise routine
+    diet_plan = None  # Initialize diet plan
+
+    # Attempt to get the user's exercise routine
+    try:
+        exercise_routine = ER.objects.get(user=user)
+    except ER.DoesNotExist:
+        exercise_routine = None
+
+    # Attempt to get the user's diet plan
+    try:
+        diet_plan = DP.objects.get(user=user)
+    except DP.DoesNotExist:
+        diet_plan = None
 
     if request.method == 'POST':
         # Safely get username and email, default to an empty string if None
@@ -198,9 +213,20 @@ def profile(request):
         messages.success(request, 'Profile updated successfully!')
         return redirect('profile')
 
-    return render(request, 'profile.html', {'user': user})
+    # Pass exercise and diet plan data to the template
+    return render(request, 'profile.html', {
+        'user': user,
+        'intensity': exercise_routine.intensity if exercise_routine else None,
+        'exercises': exercise_routine.exercises if exercise_routine else None,
+        'breakfast_plan': diet_plan.breakfast_plan if diet_plan else None,
+        'lunch_plan': diet_plan.lunch_plan if diet_plan else None,
+        'dinner_plan': diet_plan.dinner_plan if diet_plan else None,
+        'bmr': format(diet_plan.bmr, '.2f') if diet_plan else None,
+        'bmi': format(diet_plan.bmi, '.2f') if diet_plan else None,
+        'diet_type': diet_plan.diet_type if diet_plan else None,
+    })
 
-
+    
 @login_required
 def profile_pic(request):
     # Ensure the user has a profile

@@ -4,6 +4,9 @@ from .forms import MealPlannerForm
 from .forms import BMICalculatorForm
 import requests
 import random
+from .models import ER
+from .models import DP
+from django.contrib import messages
 
 # Your Spoonacular API key
 API_KEY = '789f7c2f742647cd8f9ac19833bd9323'
@@ -112,8 +115,28 @@ def meal_planner(request):
             lunch_plan = get_meal_by_type(int(bmr), diet_type, exclude_ingredients, 'lunch')
             dinner_plan = get_meal_by_type(int(bmr), diet_type, exclude_ingredients, 'dinner')
 
+            # Save diet plan to the database, updating if it already exists
+            diet_plan, created = DP.objects.update_or_create(
+                user=request.user,
+                defaults={
+                    'breakfast_plan': breakfast_plan,
+                    'lunch_plan': lunch_plan,
+                    'dinner_plan': dinner_plan,
+                    'bmr': bmr,
+                    'bmi': bmi,
+                    'diet_type': diet_type
+                }
+            )
+
+            # Format BMR and BMI for display
             bmr = format(bmr, '.2f')
             bmi = format(bmi, '.2f')
+
+            # Success message based on whether a new plan was created or updated
+            if created:
+                messages.success(request, 'Diet Plan Created Successfully!')
+            else:
+                messages.success(request, 'Diet Plan Updated Successfully!')
     
     # Render the form and meal plan results in the same template
     return render(request, 'mlform.html', {
@@ -164,6 +187,14 @@ def exercise_view(request):
     exercises = []
     intensity = None
     
+    # Check if a routine exists for the user
+    try:
+        exercise_routine = ER.objects.get(user=request.user)
+        exercises = exercise_routine.exercises
+        intensity = exercise_routine.intensity
+    except ER.DoesNotExist:
+        exercise_routine = None
+    
     if request.method == 'POST':
         form = BMICalculatorForm(request.POST)
         
@@ -184,6 +215,7 @@ def exercise_view(request):
 
             fetched_exercises_count = 0
             total_exercises_to_fetch = 8
+            exercises = []
 
             while fetched_exercises_count < total_exercises_to_fetch:
                 body_part = random.choice(body_parts)
@@ -196,4 +228,23 @@ def exercise_view(request):
                     exercises.extend(fetched_exercises)
                     fetched_exercises_count += len(fetched_exercises)
 
+            # Save or update the exercise routine
+            if exercise_routine:
+                # Update existing routine
+                exercise_routine.exercises = exercises
+                exercise_routine.intensity = intensity
+                exercise_routine.save()
+                messages.success(request, 'Exercise Routine Updated Successfully!')
+            else:
+                # Create new routine
+                ER.objects.create(
+                    user=request.user,
+                    exercises=exercises,
+                    intensity=intensity
+                )
+                messages.success(request, 'Exercise Routine Created Successfully!')
     return render(request, 'exercise.html', {'form': form, 'exercises': exercises, 'intensity': intensity})
+
+
+
+
