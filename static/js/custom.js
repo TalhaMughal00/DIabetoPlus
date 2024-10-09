@@ -38,3 +38,16 @@ function calculateBMI() {
     // Display result
     document.getElementById('result').innerText = `Your BMI is ${bmiRounded} (${category})`;
 }
+function calcinsulin() {
+    const wtKg = parseFloat(document.getElementById('weightkg').value);
+
+    // Validate input
+    if (isNaN(wtKg) || wtKg <= 0) {
+        document.getElementById('tdd').innerText = 'Please Enter Valid Weight.';
+        return;
+    }
+
+    const tdd1 = wtKg * 0.55;
+
+    document.getElementById('tdd').innerText = `Your Total Daily Dose (TDD) is ${tdd1.toFixed(2)} units`;
+}
