@@ -652,6 +652,14 @@ a:focus {
   color: #333;
 }
 
+.predict-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .predict-form select,
 .predict-form input[type="number"] {
   width: 100%;

@@ -38,16 +38,35 @@ function calculateBMI() {
     // Display result
     document.getElementById('result').innerText = `Your BMI is ${bmiRounded} (${category})`;
 }
+
 function calcinsulin() {
     const wtKg = parseFloat(document.getElementById('weightkg').value);
-
-    // Validate input
     if (isNaN(wtKg) || wtKg <= 0) {
-        document.getElementById('tdd').innerText = 'Please Enter Valid Weight.';
+        toastr.error('Please Enter a Valid Weight.', 'Error');
+        return;
+    }
+    let tdd1 = wtKg * 0.55;
+    tdd1 = Math.round(tdd1 / 2) * 2;
+    document.getElementById('tdd').value = `Your TDD is: ${tdd1} Units`;
+    let perMeal = tdd1 / 3;
+    perMeal = Math.round(perMeal / 2) * 2;
+    document.getElementById('tdd_pm').value = `Your TDD(Per Meal) is: ${perMeal} Units`;
+}
+
+function calcinsulin_cf() {
+    const tddc = parseFloat(document.getElementById('tddc').value);
+    const bgh = parseFloat(document.getElementById('bgh').value);
+    const bgt = parseFloat(document.getElementById('bgt').value)
+
+    if (isNaN(tddc) || isNaN(bgh) || isNaN(bgt)) {
+        toastr.error('Please Enter Valid Values.', 'Error');
         return;
     }
 
-    const tdd1 = wtKg * 0.55;
+    let cf = 1800 / tddc;
+    let insulin_cf = (bgh - bgt) / cf;
 
-    document.getElementById('tdd').innerText = `Your Total Daily Dose (TDD) is ${tdd1.toFixed(2)} units`;
+    insulin_cf = Math.round(insulin_cf / 2) * 2
+
+    document.getElementById('tddcf').value = `Your Correctoion Factor is: ${insulin_cf} Units of Rapid Action Insulin`;
 }

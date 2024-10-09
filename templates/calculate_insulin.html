@@ -1,6 +1,6 @@
-{% extends "base-sp.html" %} 
-{% load static %} 
-{% block title %}DiabetoPlus | Calculate Insulin{% endblock title %} 
+{% extends "base-sp.html" %}
+{% load static %}
+{% block title %}DiabetoPlus | Calculate Insulin{% endblock title %}
 
 {% block content %}
 <h2 class="container-h2 container">Welcome {{ request.user.username }} Calculate your Insulin</h2>
@@ -8,20 +8,58 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="predict-form">
+                <!-- Insulin Calculations -->
                 <h3>Calculate Your Daily Insulin</h3>
-                    <label>Weight(kg):</label>
-                    <input type="number" id="weightkg" placeholder="Enter Your Weight In Kilograms" required><br>
-                    <button onclick="calcinsulin()" type="submit">Predict</button>
-                    <label for="" class="mt-3">TDD(Total Daily Dosage)</label>
-                    <input type="number" id="tdd" placeholder="Your Daily Total Insulin">
-                    <label for="">TDD(Per Meal)</label>
-                    <input type="number" id="tdd_pm" placeholder="Insulin Dosage Per Meal"> 
+                <label>Weight(kg):</label>
+                <input type="number" id="weightkg" placeholder="Enter Your Weight In Kilograms" required><br>
+                <button onclick="calcinsulin()" type="submit">Calculate Insulin</button>
+                <label class="mt-3">TDD(Total Daily Dosage)</label>
+                <input id="tdd" placeholder="Your Daily Total Insulin">
+                <label>TDD(Per Meal)</label>
+                <input id="tdd_pm" placeholder="Insulin Dosage Per Meal">
+                <p><span style="color: red;">Note!</span> If your body is resistant to Insulin ,you may require a higher
+                    dose of insulin. If your body is sensitive to Insulin ,you may require a lower of insulin doese</p>
+                <br>
+                <hr>
+                <!-- Insulin Correction -->
+                <h3>Insulin Correction Factor</h3>
+                <label>TDD(Total daily dosage):</label>
+                <input type="number" id="tddc" placeholder="Enter Your TDD" required><br>
+                <label>Present Blood Glucose:</label>
+                <input type="number" id="bgh" placeholder="Enter Your Blood Glucose Now" required><br>
+                <label>Target Blood Glucose:</label>
+                <input type="number" id="bgt" placeholder="Enter Your Target Blood Glocose" required><br>
+                <button onclick="calcinsulin_cf()" type="submit">Calculate Insulin Correction Factor</button>
+                <label class="mt-3">Insuline Correction factor</label>
+                <input id="tddcf" placeholder="Your Insulin Correction Factor">
+                <p><span style="color: red;">Note!</span> If your body is resistant to Insulin ,you may require a higher
+                    dose of insulin. If your body is sensitive to Insulin ,you may require a lower of insulin doese</p>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="Predict-Info">
                 <h3>INFORMATION</h3>
-                <span>Hba1c Level</span>
+                <span>Insulin Sensitivity vs. Resistance:</span>
+                <p>Insulin sensitivity means your body responds well to insulin, so you may require a lower dose. Insulin resistance means your body doesn’t use insulin as effectively, so you may need a higher dose. Causes of insulin resistance can include:</p>
+                <ul>
+                    <li><strong>Obesity:</strong> Excess body fat, especially around the abdomen, can lead to increased insulin resistance.</li>
+                    <li><strong>Physical Inactivity:</strong> A sedentary lifestyle can contribute to insulin resistance.</li>
+                    <li><strong>Unhealthy Diet:</strong> Diets high in refined carbohydrates, sugars, and unhealthy fats can affect insulin sensitivity.</li>
+                    <li><strong>Hormonal Changes:</strong> Conditions such as polycystic ovary syndrome (PCOS) can affect hormone levels and lead to insulin resistance.</li>
+                    <li><strong>Chronic Stress:</strong> High levels of stress can increase cortisol levels, which may lead to insulin resistance.</li>
+                    <li><strong>Sleep Disorders:</strong> Conditions like sleep apnea can disrupt hormone balance and contribute to insulin resistance.</li>
+                </ul>
+                <span>Total Daily Dosage (TDD):</span>
+                <p>Your TDD is the total amount of insulin you need in one day. This includes both your basal insulin
+                    (long-acting) and bolus insulin (mealtime insulin).</p>
+
+                <span>Insulin Correction Factor:</span>
+                <p>To correct high blood sugar, the 1800 Rule is often used: divide 1800 by your TDD to determine how
+                    much your blood sugar will drop per unit of insulin. Adjust accordingly if you're insulin-resistant
+                    or insulin-sensitive.</p>
+
+                <span style="color: red;">Important:</span>
+                <p>Always consult your healthcare provider before making any changes to your insulin dosage.</p>
             </div>
         </div>
     </div>
