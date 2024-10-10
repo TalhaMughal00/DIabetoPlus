@@ -39,7 +39,7 @@
                         <div class="col-md-6 text-center diet-card">
                             <h2>Your Diet Plan Results</h2>
                             <p><strong>CALORIES:</strong> {{ bmr }} kcal/day</p>
-                            <p><strong>BMI:</strong> {{ bmi }}</p>
+                            <p><strong>BMI(Body Mass Index):</strong> {{ bmi }}</p>
                             <p><strong>Diet Type:</strong> {{ diet_type }}</p>
                         </div>
                     </div>
@@ -94,6 +94,8 @@
                         </div>
                         {% endfor %}
                     </div>
+                    {% else %}
+                    <p style="color: black !important;">You have not created a Meal Plan Yet.</p>
                     {% endif %}
                 </div>
                 <!-- Exercise Routine -->
