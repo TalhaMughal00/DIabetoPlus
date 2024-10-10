@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'predictor',
     'Glucose_Record',
     'recommendations',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -146,3 +147,40 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'diabetoplus@gmail.com'
 EMAIL_HOST_PASSWORD = 'swcz bxez gbce abei'
+DEFAULT_FROM_EMAIL = ' DiabetoPlus@gmail.com'
+
+
+# Admin Pannel Customization
+JAZZMIN_SETTINGS = {
+    # Hide these models when generating side menu (e.g auth.user)
+    "hide_models": ["auth.group"],
+    
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "DiabetoPlus",
+    
+    # CSS classes that are applied to the logo above
+    "site_logo_classes": "",
+    
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to the DiabetoPlus Admin Login Panel",
+
+    "site_logo": "media/favicon.ico",
+    
+     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
+    "site_icon": "media/favicon.ico",
+    
+    # List of model admins to search from the search bar, search bar omitted if excluded
+    # If you want to use a single search field you dont need to use a list, you can use a simple string 
+    "search_model": ["auth.User"],
+    
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "Home.feedback":"fa-regular fa-comment",
+    },
+    
+    # Copyright on the footer
+    "copyright": "DiabetoPlus Ltd",
+}
+

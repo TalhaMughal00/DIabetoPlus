@@ -1,0 +1,28 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Send Newsletter</h2>
+
+        <!-- Newsletter Form -->
+        <form method="post" action="{% url 'admin:send_newsletter' %}">
+            {% csrf_token %}
+            
+            <!-- Subject Input -->
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" name="subject" id="subject" class="form-control" required>
+            </div>
+
+            <!-- Message Textarea -->
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Send Newsletter</button>
+        </form>
+    </div>
+{% endblock %}

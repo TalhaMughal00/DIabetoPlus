@@ -170,12 +170,10 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-3 footer_col ">
-          <h4>
-            Newsletter
-          </h4>
-          <form action="#">
-            <input type="email" placeholder="Enter email" />
-            <button type="submit">
+          <h4>Newsletter</h4>
+          <form id="subscribeForm" method="POST" action="{% url 'subscribe_newsletter' %}">
+            {% csrf_token %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
               Subscribe
             </button>
           </form>
@@ -185,11 +183,32 @@
       <div class="footer-info">
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href={% url 'index' %}>DiabetoPlus<br><br></a>
+          <a href={% url 'index' %}>DiabetoPlus Ltd<br><br></a>
         </p>
       </div>
     </div>
   </footer>
+
+      <!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirm Subscription</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to subscribe to the newsletter with this email: 
+        <strong><span id="emailDisplay"></span></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" form="subscribeForm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- end footer section -->
 
   <!-- Bootstrap -->

@@ -8,8 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from predictor.models import Predictions
 from Glucose_Record.models import GRecords
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from Home.models import feedback
-from Home.models import Profile
+from Home.models import feedback,NewsletterSubscriber,Profile
 from django.db import IntegrityError
 from recommendations.models import ER,DP
 
@@ -149,6 +148,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
 
+@login_required
 def send_feedback(request):
     if request.method == 'POST':
         feed = request.POST.get('feed')
@@ -157,7 +157,7 @@ def send_feedback(request):
             return redirect('index')
         else:
             try:
-                feedback_instance = feedback(user=request.user, feed=feed)
+                feedback_instance = feedback(user=request.user, feedback=feed)
                 feedback_instance.save()
                 messages.success(request, 'Feedback has been sent successfully')
             except IntegrityError as e:
@@ -242,3 +242,22 @@ def profile_pic(request):
         return redirect('profile')
 
     return render(request, 'profile.html')
+
+@login_required
+def subscribe_newsletter(request):
+    if request.method == 'POST':
+        user_email = request.user.email  # Use the logged-in user's email
+
+        # Check if the email is already subscribed
+        if NewsletterSubscriber.objects.filter(email=user_email).exists():
+            messages.error(request, "This email is already subscribed to the newsletter.")
+            return redirect('index')  # Redirect back to the same page or another one
+
+        # Save the new email to the database
+        subscriber = NewsletterSubscriber(email=user_email)
+        subscriber.save()
+
+        messages.success(request, "Thank you for subscribing to our newsletter!")
+        return redirect('index')  # Redirect to a thank you page or homepage
+    
+    return render(request, 'base.html')  # Redirect to home page or any other page
