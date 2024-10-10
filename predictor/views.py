@@ -69,6 +69,12 @@ def predict_diabetes(request):
             blood_glucose_level = blood_glucose_level,
             prediction_result = result
         )
+        
+        user_predictions = Predictions.objects.filter(user=request.user)
+        if user_predictions.count() > 10:
+            oldest_prediction = user_predictions.order_by('id').first()
+            oldest_prediction.delete()
+
         return render(request, 'result.html', {'result': result})
     return render(request, 'prediction.html')
 

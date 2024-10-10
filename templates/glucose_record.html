@@ -66,6 +66,30 @@
     </div>
 </div>
 
+<div class="container update-pagination-container mb-3">
+    <a></a>
+    <div class="pagination">
+        {% if user_records.has_previous %}
+        <a class="round" href="?page=1">
+            <i class="fa-solid fa-backward"></i>
+        </a>
+        <a class="round" href="?page={{ user_records.previous_page_number }}">
+            <i class="fa-solid fa-caret-left"></i>
+        </a>
+        {% endif %}
+        <a class="round active" href="?page={{ user_records.number }}">{{ user_records.number }}</a>
+        {% if user_records.has_next %}
+        <a class="round" href="?page={{ user_records.next_page_number }}">
+            <i class="fa-solid fa-caret-right"></i>
+        </a>
+        <a class="round" href="?page={{ user_records.paginator.num_pages }}">
+            <i class="fa-solid fa-forward"></i>
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+
 <!-- Add Record Modal -->
 <div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

@@ -5,11 +5,22 @@ from .models import GRecords
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from io import BytesIO
+from django.core.paginator import Paginator
 
 @login_required
 def record(request):
     user_records = GRecords.objects.filter(user=request.user).order_by('-date')
-    return render(request, 'glucose_record.html', {'Glucose_Record': user_records})
+
+    # Set up pagination
+    paginator = Paginator(user_records, 30)  # Show 10 records per page
+    page_number = request.GET.get('page')
+    user_records_page = paginator.get_page(page_number)
+
+    return render(request, 'glucose_record.html', {
+        'Glucose_Record': user_records_page,  # Keep the original context variable
+        'user_records': user_records_page,  # For pagination
+        'num': paginator.num_pages,
+    })
 
 @login_required
 def add_record(request):
