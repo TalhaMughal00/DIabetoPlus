@@ -57,29 +57,10 @@
 }
 
 .card-info ul li {
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     font-size: 1.05rem;
     color: #333;
-}
-
-/* Styling for the Read More Button */
-.btn1 {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #198754;
-    color: #fff;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
-}
-
-.btn1 {
-    background-color: #145f3b;
-    text-decoration: none;
-    color: #fff;
 }
 
 

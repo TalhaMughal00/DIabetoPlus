@@ -56,7 +56,7 @@ def calculate_insulin(request):
 
 
 def new_diabtetics(request):
-    return render(request, 'new_diabetics.html')
+    return render(request, 'info/new_diabetics.html')
 
 def login_view(request):
     if request.method == 'POST':

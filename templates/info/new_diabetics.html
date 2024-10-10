@@ -1,0 +1,278 @@
+{% extends "base-sp.html" %}
+{% load static %}
+{% block css %}
+<link href={% static "css/new_diabetics_css.css" %} rel="stylesheet" />
+{% endblock css %}
+{% block title %}DiabetoPlus | New Diabetics{% endblock title %}
+
+{% block content %}
+
+<div class="intro-container container mt-3">
+    <p>Being newly diagnosed with diabetes can be confusing and overwhelming with all the new things you have to learn
+        and understand. This page provides a synopsis of the most important information.</p>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/info/p1.jpg' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>What is Diabetes?</h2>
+            <p>
+                Find out about diabetes: the terminology, symptoms, diagnosis, and goals of treatment. Learn how the
+                body
+                keeps the blood sugar in balance.
+            </p>
+            <ul>
+                <li>What is Blood Sugar, Insulin</li>
+                <li>Symptoms</li>
+                <li>Diagnosis</li>
+                <li>Goals</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-info">
+        <h2>What is Diabetes?</h2>
+        <p>Diabetes is a chronic health condition that affects how your body turns food into energy, particularly in the
+            way it processes blood sugar (glucose). Blood sugar is the main source of energy for the cells, and it comes
+            from the food you eat. The hormone insulin, produced by the pancreas, helps glucose enter the cells for
+            energy. In diabetes, either the body doesn’t produce enough insulin, can’t use insulin effectively, or both,
+            leading to high blood sugar levels over time.</p>
+        <h2>Blood Sugar</h2>
+        <p>Blood Sugar (Glucose) is the primary sugar found in your blood, and it’s the main source of energy for your
+            body’s cells. Blood sugar comes from the food you eat, particularly carbohydrates, and it circulates through
+            your bloodstream, delivering energy to cells for immediate use or storing it for later.</p>
+        <h2>Insulin</h2>
+        <p>Insulin is a hormone produced by the pancreas. It helps glucose enter the cells for energy. Insulin is
+            released from the cells when your blood sugar levels are high. Your body uses insulin to help glucose leave
+            the cells, and it then uses it to replenish the blood sugar levels. Insulin can also help you lose weight by
+            reducing the need for glucose intake.</p>
+        <h2>Symptoms</h2>
+        <p>Diabetes symptoms can include increased thirst, frequent urination, increased hunger, fatigue, and
+            unexplained weight loss. Other signs are blurred vision, slow-healing sores, frequent infections, and
+            tingling in the hands or feet. Type 1 symptoms often appear quickly and are severe, while type 2 symptoms
+            may be milder and develop slowly. Gestational diabetes typically has no noticeable symptoms but is
+            identified through screening.</p>
+        <h2>Diagnosis</h2>
+        <p>Diabetes is diagnosed by testing for blood sugar levels. If your blood sugar level is consistently high or
+            uncontrolled, you may be diagnosed with diabetes. If you have any of the symptoms listed above, it may be a
+            sign that you have diabetes. If you're unsure, consult a healthcare professional.</p>
+        <h2>Goals</h2>
+        <p>Diabetes is a chronic condition that affects how your body turns food into energy, particularly in the
+            way it processes blood sugar. Learn more about your goals and how they can help you manage your diabetes:
+            managing blood sugar, managing symptoms, and addressing long-term health issues.</p>
+    </div>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/info/p2.jpg' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>Types of Diabetes?</h2>
+            <p>
+                There are many types of diabetes. Learn more about your type or see a comprehensive list in the
+                classification table.
+            </p>
+            <ul>
+                <li>Type 1</li>
+                <li>Type 2</li>
+                <li>Gestational</li>
+                <li>Other</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-info">
+        <h2>Type 1</h2>
+        <p>Type 1 Diabetes is a chronic autoimmune condition where the immune system attacks insulin-producing beta
+            cells in the pancreas, resulting in little or no insulin production. It typically develops in children and
+            young adults, although it can occur at any age. Symptoms include increased thirst, frequent urination,
+            extreme hunger, weight loss, fatigue, and blurred vision. Diagnosis is made through blood tests measuring
+            blood sugar levels.
+            Management requires lifelong insulin therapy, regular blood sugar monitoring, a balanced diet, and exercise
+            to maintain blood sugar within target ranges. If unmanaged, Type 1 diabetes can lead to serious short-term
+            complications like hypoglycemia and long-term complications affecting the heart, kidneys, eyes, and nerves.
+        </p>
+        <h2>Type 2</h2>
+        <p>Type 2 Diabetes is a chronic condition where the body resists insulin or doesn’t produce enough, resulting in
+            high glucose levels. Commonly seen in adults and increasingly in children due to obesity, its key risk
+            factors include genetics, poor diet, and inactivity. Symptoms may include increased thirst, frequent
+            urination, hunger, fatigue, and blurred vision. Diagnosis is through blood tests like fasting blood sugar
+            and A1C. Management focuses on lifestyle changes, such as a healthy diet and exercise, along with
+            medications if needed. Regular monitoring is essential to prevent complications like heart disease and
+            kidney damage.</p>
+        <h2>Gestational Diabetes</h2>
+        <p>Gestational Diabetes occurs during pregnancy when the body cannot produce enough insulin, leading to elevated
+            blood sugar levels. Common in women with risk factors like obesity or a family history of diabetes, it often
+            has no clear symptoms and is diagnosed through screening tests between the 24th and 28th weeks. Management
+            involves a healthy diet, regular exercise, and monitoring blood sugar levels, with insulin or oral
+            medications if needed. If unmanaged, it can result in complications for both mother and baby, including a
+            higher risk of type 2 diabetes and delivery issues.</p>
+        <h2>Other Types</h2>
+        <p>In addition to Type 1, Type 2, and gestational diabetes, several other types exist. Prediabetes is a
+            condition where blood sugar levels are elevated but not high enough for a diabetes diagnosis, often leading
+            to Type 2 diabetes. Maturity Onset Diabetes of the Young (MODY) is a rare genetic form that typically occurs
+            in adolescents or young adults, often misdiagnosed as Type 1 or Type 2. Latent Autoimmune Diabetes in Adults
+            (LADA) is a slowly progressing autoimmune diabetes in adults, resembling both Type 1 and Type 2. Secondary
+            diabetes arises from other medical conditions or medications, such as Cushing's syndrome or corticosteroid
+            use. Neonatal diabetes occurs in infants within the first six months, caused by genetic mutations, and can
+            be either transient or permanent. Lastly, Type 3c diabetes develops due to pancreatic diseases like
+            pancreatitis or cancer. Each type has unique causes and management strategies, highlighting the need for
+            accurate diagnosis and treatment.</p>
+    </div>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/info/p3.png' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>Causes of Diabetes</h2>
+            <p>
+                Read more about how different types of diabetes develop: what are the risk factors, what is the process
+                that leads to diabetes
+            </p>
+            <ul>
+                <li>Type 1 Diabets</li>
+                <li>Type 2 Diabetes</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-info">
+        <h2>Type 1 Diabetes</h2>
+        <p>The exact cause of Type 1 Diabetes is not fully understood, but it is primarily an autoimmune condition where
+            the immune system mistakenly attacks and destroys the insulin-producing beta cells in the pancreas. This
+            destruction leads to little or no insulin production, resulting in elevated blood sugar levels. Genetic
+            factors play a significant role, as individuals with a family history of Type 1 diabetes are at higher risk.
+            Additionally, environmental triggers, such as viral infections, may contribute to the onset of the disease,
+            prompting the immune response that damages the pancreas. Overall, it is a complex interplay of genetic
+            predisposition and environmental factors that leads to Type 1 diabetes.</p>
+        <h2>Type 2 Diabetes</h2>
+        <p>The primary causes of Type 2 Diabetes involve a combination of genetic, lifestyle, and environmental factors.
+            Insulin resistance, where the body's cells do not respond effectively to insulin, is a key feature of this
+            condition. This resistance can develop due to factors such as obesity, physical inactivity, and poor dietary
+            habits, which contribute to excessive fat accumulation, particularly around the abdomen. Additionally,
+            genetics play a significant role, as having a family history of diabetes increases the risk. Other
+            contributing factors include age, with the risk rising as individuals get older, and certain medical
+            conditions like hypertension or high cholesterol. Overall, Type 2 diabetes results from a complex interplay
+            of lifestyle choices and genetic susceptibility, leading to impaired insulin function and elevated blood
+            sugar levels.</p>
+    </div>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/info/p4.png' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>Treatment of Diabetes</h2>
+            <p>
+                Insulin given by injection is the central treatment for type 1 diabetes. There are fast acting and long
+                acting insulin formulations. It is important to understand when to use these different formulations and
+                the concepts behind choosing the right insulin dose. There is one other injected medication for type 1
+                diabetes, Symlin, that may be given in addition to insulin.
+            </p>
+            <ul>
+                <li>Insulin and its Types</li>
+                <li>Pills</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-info">
+        <h2>Insulin and its Types</h2>
+        <p>Insulin is a hormone produced by the pancreas that plays a crucial role in regulating blood sugar (glucose)
+            levels. It allows cells to absorb glucose from the bloodstream for energy or storage, thereby lowering blood
+            sugar levels. Insulin also helps control how the body stores and uses carbohydrates, fats, and proteins.</p>
+        <ul>
+            <li><strong>Rapid-acting insulin:</strong> This type begins to work within 15 minutes and lasts for about 3
+                to 5 hours. It is typically used to manage blood sugar spikes after meals. Examples include insulin
+                lispro (Humalog) and insulin aspart (NovoLog).</li>
+            <li><strong>Short-acting insulin:</strong>Also known as regular insulin, it starts to work within 30 minutes
+                and lasts about 6 to 8 hours. It can be used for meal coverage as well. Examples include regular insulin
+                (Humulin R, Novolin R).</li>
+            <li><strong>Intermediate-acting insulin:</strong>This type takes about 2 to 4 hours to start working and
+                lasts around 12 to 18 hours. It is often used for basal insulin coverage. An example is insulin NPH
+                (Humulin N, Novolin N).</li>
+            <li><strong>Long-acting insulin:</strong>It begins to work several hours after injection and provides a
+                steady release of insulin over 24 hours or more. It is used for basal insulin needs. Examples include
+                insulin glargine (Lantus, Toujeo) and insulin detemir (Levemir).</li>
+            <li><strong>Ultra-long-acting insulin:</strong>This type has an even longer duration of action, lasting over
+                24 hours. It is designed to provide consistent insulin levels throughout the day and night. An example
+                is insulin degludec (Tresiba).</li>
+            <li><strong>Pre-mixed insulin:</strong>This combines different types of insulin, usually a rapid-acting and
+                an intermediate-acting insulin, to provide both mealtime and basal coverage in one injection. Examples
+                include 70/30 (70% NPH and 30% regular) formulations.</li>
+        </ul>
+        <p class="mt-3">Each type of insulin serves different purposes and is used based on individual needs, lifestyle,
+            and the type of diabetes being treated. Proper management of insulin therapy is crucial for maintaining
+            stable blood sugar levels and preventing complications.</p>
+        <h2>Pills</h2>
+        <p>In addition to insulin, several oral medications are available to manage blood sugar levels in individuals
+            with Type 2 Diabetes. Metformin is the first-line treatment, improving insulin sensitivity and reducing
+            glucose production in the liver. Sulfonylureas and meglitinides stimulate the pancreas to release more
+            insulin, while DPP-4 inhibitors increase insulin production and decrease glucose output in response to
+            meals. GLP-1 receptor agonists enhance insulin secretion and promote satiety, though some are injectable.
+            SGLT2 inhibitors prevent glucose reabsorption in the kidneys, leading to increased glucose excretion in
+            urine. Lastly, thiazolidinediones (TZDs) improve insulin sensitivity in muscle and fat tissues. Each
+            medication has unique mechanisms, benefits, and side effects, necessitating personalized treatment plans in
+            consultation with healthcare providers.</p>
+    </div>
+</div>
+
+<div class="card-body container my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src={% static 'media/info/p5.webp' %} height="300px" width="380px" alt="">
+        </div>
+        <div class="card-info col-lg-8">
+            <h2>When the Blood Sugar is Uncontrolled</h2>
+            <p>
+                When your blood sugar is too high or too low, you need to understand the symptoms and what to do. Some
+                situations require urgent medical attention.
+            </p>
+            <ul>
+                <li>Low Blood Sugars</li>
+                <li>High Blood Sugars</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-info">
+        <h2>When the Blood Sugar is Uncontrolled</h2>
+        <p>When blood sugar levels are not controlled, it can lead to both short-term and long-term complications. In
+            the short term, persistently high blood sugar can cause symptoms like increased thirst, frequent urination,
+            fatigue, and blurred vision. If left untreated, it may result in diabetic ketoacidosis (DKA), a
+            life-threatening condition characterized by high blood sugar and ketone buildup. Long-term, uncontrolled
+            blood sugar can lead to serious complications such as heart disease, kidney damage, nerve damage
+            (neuropathy), vision problems (including diabetic retinopathy), and an increased risk of infections.
+            Effective management is crucial to prevent these health issues and maintain overall well-being.</p>
+        <h2>Low Blood Sugars</h2>
+        <p>
+            When blood sugar levels drop too low, a condition known as hypoglycemia occurs. Symptoms can include
+            shakiness, sweating, confusion, irritability, rapid heartbeat, dizziness, and hunger. If blood sugar levels
+            continue to fall, it can lead to severe symptoms such as seizures, loss of consciousness, or even coma.
+            Hypoglycemia can be triggered by factors such as taking too much insulin or diabetes medication, skipping
+            meals, excessive exercise, or alcohol consumption. It is important to treat low blood sugar promptly by
+            consuming fast-acting carbohydrates, such as glucose tablets, fruit juice, or sugary snacks, to quickly
+            raise blood sugar levels and prevent serious complications.
+        </p>
+        <h2>High Blood Sugars</h2>
+        <p>
+            When blood sugar levels are too high, a condition called hyperglycemia occurs. Symptoms can include
+            increased thirst, frequent urination, fatigue, blurred vision, and headache. If hyperglycemia persists and
+            is not managed, it can lead to serious complications, such as diabetic ketoacidosis (DKA) in Type 1
+            diabetes, characterized by high blood sugar and ketone buildup, which can be life-threatening. In Type 2
+            diabetes, prolonged high blood sugar can result in a hyperglycemic hyperosmolar state (HHS), also dangerous
+            and requiring urgent medical attention. Chronic hyperglycemia can cause long-term complications, including
+            damage to the heart, kidneys, nerves, and eyes. Effective management through medication, lifestyle changes,
+            and regular monitoring is essential to prevent and treat high blood sugar levels.
+        </p>
+    </div>
+</div>
+
+<!-- Continue with the rest of your content -->
+
+{% endblock content %}
