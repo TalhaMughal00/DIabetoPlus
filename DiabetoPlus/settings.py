@@ -152,6 +152,10 @@ DEFAULT_FROM_EMAIL = ' DiabetoPlus@gmail.com'
 
 # Admin Pannel Customization
 JAZZMIN_SETTINGS = {
+    
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "DiabetoPlus",
+    
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": ["auth.group"],
     
@@ -178,6 +182,7 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "Home.feedback":"fa-regular fa-comment",
+        "Home.newslettersubscriber":"fa-regular fa-envelope",
     },
     
     # Copyright on the footer
