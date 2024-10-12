@@ -90,10 +90,16 @@ def sign_up(request):
         password1 = request.POST['pass1']
         password2 = request.POST['pass2']
         
+        
+        
         if not username or not email or not password1 or not password2:
             messages.error(request, 'All Fields Are Required')
             return render(request, 'sign_up.html')
-
+        
+        if username.isdigit():
+            messages.error(request, 'Username cannot be just a number')
+            return render(request, 'sign_up.html')
+        
         if password1 != password2:
             messages.error(request, 'Passwords do not match')
             return render(request, 'sign_up.html')
