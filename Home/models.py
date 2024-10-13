@@ -21,6 +21,10 @@ class Profile(models.Model):
     
 class NewsletterSubscriber(models.Model):
     email = models.EmailField()
+    
+    class Meta:
+        verbose_name = "Send Newsletter"
+        verbose_name_plural = "Send Newsletters"
 
     def __str__(self):
         return self.email
