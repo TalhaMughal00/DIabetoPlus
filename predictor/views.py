@@ -8,14 +8,14 @@ from django.contrib import messages
 from predictor.models import Predictions
 
 # Define the path to the saved model and other components
-# model_path = os.path.join(settings.BASE_DIR, 'static', 'model', 'diabetes_model_with_all_features.pkl')
+model_path = os.path.join(settings.BASE_DIR, 'static', 'model', 'diabetes_model_with_all_features.pkl')
 
 # Load the trained model and other necessary components
-# model_data = joblib.load(model_path)
-# model = model_data['model']
-# scaler = model_data['scaler']
-# mean_hba1c = model_data['mean_hba1c']
-# label_encoders = model_data['label_encoders']
+model_data = joblib.load(model_path)
+model = model_data['model']
+scaler = model_data['scaler']
+mean_hba1c = model_data['mean_hba1c']
+label_encoders = model_data['label_encoders']
 
 @login_required
 def predict_diabetes(request):
