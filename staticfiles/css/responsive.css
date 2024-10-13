@@ -37,6 +37,19 @@
 
 @media (max-width: 767px) {
 
+  .profile-pic-nav{
+    margin-left: 30px;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    margin-top: 0;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
   .about_section .img-box {
     margin-bottom: 30px;
   }

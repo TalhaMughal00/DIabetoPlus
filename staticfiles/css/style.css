@@ -50,21 +50,7 @@ a:focus {
   outline: none !important;
   box-shadow: none;
 }
-
-/* Welcome Message */
-.welcome {
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  text-align: center;
-  margin-bottom: 20px;
-  background-color: #62d2a2;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-/* Welcome Message End */
-
+ 
 /*header section*/
 .hero_area {
   position: relative;
@@ -336,30 +322,27 @@ a:focus {
 }
 
 .contact_section .heading_container {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .contact_section .heading_container h2 {
   text-transform: uppercase;
 }
 
-.contact_section .form_container input {
+.contact_section .form_container textarea {
   width: 100%;
   border: none;
-  height: 50px;
-  margin-bottom: 15px;
-  padding-left: 20px;
-  outline: none;
-  color: #101010;
   background: #eeeeee;
 }
 
-.contact_section .form_container input::placeholder {
+.contact_section .form_container textarea::placeholder {
   color: #000000;
 }
 
-.contact_section .form_container input.message-box {
-  height: 175px;
+.contact_section .form_container textarea.message-box {
+  box-shadow: none;
+  height: 150px;
+  margin-bottom: 15px;
 }
 
 .contact_section .form_container button {
@@ -547,10 +530,12 @@ a:focus {
   border-radius: 100%;
   margin-right: 10px;
   font-size: 24px;
+  transition: ease 0.5s;
 }
 
 .footer_section .footer_social a:hover {
   color: #62d2a2;
+  transform: translateY(-4px);
 }
 
 .footer_section .footer_links {
@@ -637,6 +622,7 @@ a:focus {
 
 .container-predict h3{
   font-weight: bold;
+  text-align: center;
 }
 
 .container-predict span{
@@ -664,6 +650,14 @@ a:focus {
   margin-bottom: 8px;
   font-weight: bold;
   color: #333;
+}
+
+.predict-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .predict-form select,
@@ -704,4 +698,200 @@ a:focus {
   display: none;
 }
 
+.Predict-Info{
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.modal.fade .modal-dialog {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+  opacity: 1;
+}
+
 /* End Prediction Page */
+
+/* Prediction Table */
+.container_predictions {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container_predictions h2{
+  font-weight: bold;
+}
+
+.container_predictions a{
+  display: inline-block;
+  padding: 10px 45px;
+  background-color: #62d2a2;
+  color: #ffffff;
+  border-radius: 5px;
+  transition: all 0.3s;
+  border: 1px solid #62d2a2;
+}
+
+.container_predictions a:hover {
+  background-color: transparent;
+  color: #62d2a2;
+}
+
+.table {
+  border: none;
+}
+
+.table td {
+  font-size: 15px;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+td,
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.badge {
+  font-size:15px;
+  padding: 5px;
+}
+/* End Prediction Table */
+
+.update-pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pagination a {
+  color: black;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  margin-inline: 2px;
+}
+
+.pagination a:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination .round {
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: gray;
+}
+
+.pagination .round:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Cards */
+
+.card-hover {
+  transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+}
+
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  filter: brightness(100%);
+}
+
+.overlay-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+}
+
+.card-title{
+  color: #1fab89;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #fff;
+  font-weight: bold;
+}
+
+.card-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.card-btn {
+  background-color: #62d2a2;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #62d2a2;
+  border-radius: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.card-btn:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.profile-pic-nav {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.profile-name{
+  margin-left: 2px;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+}

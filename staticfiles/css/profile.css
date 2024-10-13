@@ -1,0 +1,63 @@
+.profile-side {
+    background-color: #178066;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 0 !important;
+}
+
+.profile-side h3,
+p {
+    color: #ffffff !important;
+}
+
+.profile-side a {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    padding: 10px;
+    background-color: #62d2a2;
+    color: #ffffff;
+    border-radius: 5px;
+    transition: all 0.3s;
+    border: 1px solid #62d2a2;
+}
+
+.profile-side a:hover {
+    background-color: transparent;
+    color: #62d2a2;
+}
+
+.profile-tabs .nav-link {
+    color: #178066;
+    font-weight: bold;
+    padding: 5px;
+    margin: 0 5px 0;
+}
+
+.profile-tabs .nav-link.active {
+    background-color: #62d2a2;
+    color: #ffffff;
+}
+
+.exercise-card p {
+    color: black !important;
+}
+
+.btn-block {
+    width: 100%;
+    background-color: #62d2a2;
+    border: 1px solid #62d2a2;
+    color: #ffffff;
+    padding: 8px 30px;
+    transition: all 0.3s;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.diet-card p {
+    color: black !important;
+}
+
+.diet-card h5 {
+    color: #178066 !important;
+}
