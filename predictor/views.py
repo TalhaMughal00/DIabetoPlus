@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import joblib
 import pandas as pd
@@ -7,8 +7,8 @@ import os
 from django.contrib import messages
 from predictor.models import Predictions
 
-# Define the path to the saved model and other components
-model_path = os.path.join(settings.BASE_DIR, 'static', 'model', 'diabetes_model_with_all_features.pkl')
+# Define the path to the saved model in the media root
+model_path = os.path.join(settings.MEDIA_ROOT, 'model', 'diabetes_model_with_all_features.pkl')
 
 # Load the trained model and other necessary components
 model_data = joblib.load(model_path)
@@ -58,16 +58,16 @@ def predict_diabetes(request):
         
         # Saving Prediction in Database
         Predictions.objects.create(
-            user = request.user,
-            gender = gender,
-            age = age,
-            hypertension = hypertension,
-            heart_disease = heart_disease,
-            smoking_history = smoking_history,
-            bmi = bmi,
-            hba1c_level = hba1c_level,
-            blood_glucose_level = blood_glucose_level,
-            prediction_result = result
+            user=request.user,
+            gender=gender,
+            age=age,
+            hypertension=hypertension,
+            heart_disease=heart_disease,
+            smoking_history=smoking_history,
+            bmi=bmi,
+            hba1c_level=hba1c_level,
+            blood_glucose_level=blood_glucose_level,
+            prediction_result=result
         )
         
         user_predictions = Predictions.objects.filter(user=request.user)
@@ -76,6 +76,7 @@ def predict_diabetes(request):
             oldest_prediction.delete()
 
         return render(request, 'result.html', {'result': result})
+    
     return render(request, 'prediction.html')
 
 @login_required
