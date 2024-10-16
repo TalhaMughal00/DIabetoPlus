@@ -9,7 +9,7 @@ from .models import DP
 from django.contrib import messages
 
 # Your Spoonacular API key
-API_KEY = '789f7c2f742647cd8f9ac19833bd9323'
+API_KEY = ''
 
 # BMR calculation function using the Harris-Benedict formula
 def calculate_bmr(gender, weight, height_cm, age, activity_level):
@@ -153,8 +153,8 @@ def meal_planner(request):
 def get_exercises(body_parts=None, equipment=None, limit=8, offset=0):
     url = "https://exercisedb.p.rapidapi.com/exercises"
     headers = {
-        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-        "X-RapidAPI-Key": "9a73ff69e1msh0f3b85796099b8fp17e6e3jsnb39db174541b"
+        "X-RapidAPI-Host": "",
+        "X-RapidAPI-Key": ""
     }
     params = {'limit': limit, 'offset': offset}
     
